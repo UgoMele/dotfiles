@@ -3,9 +3,12 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         priority = 1000,
-        config = function()
-            vim.cmd.colorscheme "catppuccin"
-        end
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = true,
+        opts = ...
     },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
@@ -22,7 +25,7 @@ return {
         config = function()
             local config = require("nvim-treesitter.configs")
             config.setup({
-                ensure_installed = { "lua", "c", "bash" },
+                ensure_installed = { "lua", "c", "bash", "go" },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -46,7 +49,7 @@ return {
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "dracula"
+                    theme = "gruvbox"
                 }
             })
         end
@@ -75,7 +78,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "bashls", "clangd" }
+                ensure_installed = { "lua_ls", "bashls", "clangd", "gopls" }
             })
         end
     },
@@ -93,6 +96,9 @@ return {
                 capabilities = capabilities,
             })
             lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.gopls.setup({
                 capabilities = capabilities,
             })
 
