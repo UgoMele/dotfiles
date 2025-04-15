@@ -16,6 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 
-vim.obackground = "dark"
+vim.o.background = "dark"
 
 vim.cmd("colorscheme gruvbox")

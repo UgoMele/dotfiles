@@ -6,3 +6,4 @@ vim.cmd("set shiftwidth=4")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.wo.number = true
