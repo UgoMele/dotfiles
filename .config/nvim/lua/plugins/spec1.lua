@@ -10,6 +10,10 @@ return {
 		config = true,
 		opts = ...,
 	},
+    {
+        "Mofiqul/dracula.nvim",
+        priority = 1000,
+    },
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
@@ -64,7 +68,7 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "gruvbox",
+					theme = "dracula-nvim",
 				},
 			})
 		end,
