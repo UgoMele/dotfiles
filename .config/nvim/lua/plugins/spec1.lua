@@ -1,5 +1,11 @@
 return {
 	{
+		"neanias/everforest-nvim",
+		version = false,
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
@@ -10,10 +16,34 @@ return {
 		config = true,
 		opts = ...,
 	},
-    {
-        "Mofiqul/dracula.nvim",
-        priority = 1000,
-    },
+	{
+		"Mofiqul/dracula.nvim",
+		priority = 1000,
+	},
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("cyberdream").setup({
+				variant = "default",
+			})
+		end,
+	},
+	{
+		"zenbones-theme/zenbones.nvim",
+		dependencies = "rktjmp/lush.nvim",
+		lazy = false,
+		priority = 1000,
+		-- config = function()
+		--     vim.g.zenbones_darken_comments = 45
+		--     vim.cmd.colorscheme('zenbones')
+		-- end
+	},
+	{
+		"olimorris/onedarkpro.nvim",
+		priority = 1000, -- Ensure it loads first
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
@@ -23,6 +53,11 @@ return {
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 		end,
+	},
+	{
+		"vyfor/cord.nvim",
+		build = ":Cord update",
+		-- opts = {}
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -68,7 +103,7 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "dracula-nvim",
+					theme = "auto",
 				},
 			})
 		end,
@@ -96,7 +131,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "bashls", "clangd", "gopls" },
+				ensure_installed = { "lua_ls", "bashls", "clangd", "gopls", "eslint", "ts_ls", "pyright" },
 			})
 		end,
 	},
@@ -117,6 +152,15 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.eslint.setup({
 				capabilities = capabilities,
 			})
 
@@ -220,6 +264,27 @@ return {
 			require("render-markdown").setup({
 				latex = { enabled = false },
 				html = { enabled = false },
+			})
+		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup({
+				opts = {
+					-- Defaults
+					enable_close = true, -- Auto close tags
+					enable_rename = true, -- Auto rename pairs of tags
+					enable_close_on_slash = false, -- Auto close on trailing </
+				},
+				-- Also override individual filetype configs, these take priority.
+				-- Empty by default, useful if one of the "opts" global settings
+				-- doesn't work well in a specific filetype
+				per_filetype = {
+					["html"] = {
+						enable_close = true,
+					},
+				},
 			})
 		end,
 	},

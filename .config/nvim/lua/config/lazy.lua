@@ -17,5 +17,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- vim.o.background = "dark" -- this is for gruvbox theme
+-- vim.cmd("set termguicolors") --this is for zenbones theme
 
-vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme everforest")
+
+vim.cmd("hi Normal guibg=NONE")
+vim.cmd("hi NonText guibg=NONE")
+vim.cmd("hi Normal ctermbg=NONE")
+vim.cmd("hi NonText ctermbg=NONE")
